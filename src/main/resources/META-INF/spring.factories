@@ -1,0 +1,5 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  com.slalom.autoconfiguration.delorean.TimeMachineAutoConfiguration,\
+  com.slalom.autoconfiguration.delorean.TimeMachineApacheHttpClientAutoConfiguration,\
+  com.slalom.autoconfiguration.delorean.TimeMachineOkHttp3AutoConfiguration,\
+  com.slalom.autoconfiguration.delorean.TimeMachineSpringRestTemplateAutoConfiguration

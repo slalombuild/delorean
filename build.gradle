@@ -1,0 +1,82 @@
+buildscript {
+    repositories {
+        maven { url 'http://repo.spring.io/plugins-release' }
+    }
+    dependencies {
+        classpath "org.springframework.build.gradle:propdeps-plugin:${propdepsPluginVersion}"
+        classpath 'ca.cutterslade.gradle:gradle-dependency-analyze:1.1.0'
+    }
+}
+
+plugins {
+    //id "io.spring.dependency-management" version "0.6.1.RELEASE"
+}
+
+group 'com.slalom.delorean'
+version "${buildVersion}"
+
+apply plugin: 'maven'
+apply plugin: 'java'
+apply plugin: 'groovy'
+apply plugin: 'idea'
+apply plugin: 'eclipse'
+
+apply plugin: 'propdeps'
+apply plugin: 'propdeps-maven'
+apply plugin: 'propdeps-idea'
+apply plugin: 'propdeps-eclipse'
+apply plugin: 'maven'
+
+apply plugin: 'ca.cutterslade.analyze'
+
+sourceCompatibility = JavaVersion.VERSION_1_8
+targetCompatibility = JavaVersion.VERSION_1_8
+
+javadoc {
+    options {
+        links "http://docs.oracle.com/javase/8/docs/api/"
+    }
+}
+
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile "org.springframework:spring-beans:${springFrameworkVersion}"
+    compile "org.springframework:spring-core:${springFrameworkVersion}"
+    compile "org.springframework:spring-web:${springFrameworkVersion}"
+    compile "org.springframework:spring-webmvc:${springFrameworkVersion}"
+    compile "org.springframework:spring-context:${springFrameworkVersion}"
+    compile "org.springframework.boot:spring-boot:${springBootVersion}"
+    compile "org.springframework.boot:spring-boot-autoconfigure:${springBootVersion}"
+    compile "org.slf4j:slf4j-api:${slf4jVersion}"
+
+    provided "javax.servlet:javax.servlet-api:${servletVersion}"
+
+    optional "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
+    optional "com.squareup.okhttp3:okhttp:${okHttp3Version}"
+    optional "org.apache.httpcomponents:httpcore:${httpCoreVersion}"
+    optional "org.apache.httpcomponents:httpclient:${httpClientVersion}"
+
+    runtime "ch.qos.logback:logback-classic:${logbackVersion}"
+
+    testCompile "org.codehaus.groovy:groovy-all:${groovyVersion}"
+    testCompile "org.spockframework:spock-core:${spockVersion}"
+    testCompile "org.springframework:spring-test:${springFrameworkVersion}"
+    testCompile "com.squareup.okhttp3:mockwebserver:${okHttp3Version}"
+
+
+    testCompile "org.slf4j:jcl-over-slf4j:${slf4jVersion}"
+    testRuntime "ch.qos.logback:logback-classic:${logbackVersion}"
+    testRuntime "junit:junit:${junitVersion}"
+
+    //For some reason spock explodes if it can't find a commons-logging impl on the testCompile classpath
+    permitTestUnusedDeclared "org.slf4j:jcl-over-slf4j:${slf4jVersion}"
+    //Used to generate autocomplete hints for @ConfigurationProperties
+    permitUnusedDeclared "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
+    permitUnusedDeclared "org.apache.httpcomponents:httpclient:${httpClientVersion}"
+}
+
+compileJava.dependsOn(processResources)

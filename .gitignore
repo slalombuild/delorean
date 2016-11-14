@@ -1,0 +1,35 @@
+*.iml
+*.iws
+.idea/
+*.ipr
+*.log
+*.class
+.classpath
+.gradle
+.groovy
+.settings/
+.mymetadata/
+.project
+.springBeans
+.spring-beans
+.factorypath
+.java-version
+.gradletasknamecache
+.DS_File
+.DS_Store
+atlassian-ide-plugin.xml
+rebel.xml
+maven-eclipse.xml
+MANIFEST.MF
+
+# Ignore build directories #
+target/
+build/
+bin/
+classes/
+out/
+
+# Package Files #
+*.jar
+*.war
+*.ear
