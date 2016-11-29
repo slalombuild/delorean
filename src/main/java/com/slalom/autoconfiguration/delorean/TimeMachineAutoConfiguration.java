@@ -26,7 +26,7 @@ public class TimeMachineAutoConfiguration {
 
     private final TimeMachineConfigurationProperties properties;
 
-    public TimeMachineAutoConfiguration(TimeMachineConfigurationProperties properties) {
+    public TimeMachineAutoConfiguration(@Autowired TimeMachineConfigurationProperties properties) {
         this.properties = properties;
     }
 

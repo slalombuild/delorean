@@ -3,18 +3,20 @@ buildscript {
         maven { url 'http://repo.spring.io/plugins-release' }
     }
     dependencies {
+        classpath "org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}"
         classpath "org.springframework.build.gradle:propdeps-plugin:${propdepsPluginVersion}"
-        classpath 'ca.cutterslade.gradle:gradle-dependency-analyze:1.1.0'
+        classpath "ca.cutterslade.gradle:gradle-dependency-analyze:${dependencyAnalyzeVersion}"
     }
 }
 
 plugins {
-    //id "io.spring.dependency-management" version "0.6.1.RELEASE"
+    id "io.spring.dependency-management" version "0.6.1.RELEASE"
 }
 
 group 'com.slalom.delorean'
 version "${buildVersion}"
 
+apply plugin: "io.spring.dependency-management"
 apply plugin: 'maven'
 apply plugin: 'java'
 apply plugin: 'groovy'
@@ -32,51 +34,55 @@ apply plugin: 'ca.cutterslade.analyze'
 sourceCompatibility = JavaVersion.VERSION_1_8
 targetCompatibility = JavaVersion.VERSION_1_8
 
+dependencyManagement {
+    imports {
+        mavenBom "org.springframework.boot:spring-boot-starter-parent:${springBootVersion}"
+    }
+}
+
 javadoc {
     options {
         links "http://docs.oracle.com/javase/8/docs/api/"
     }
 }
 
-
 repositories {
     mavenCentral()
 }
 
 dependencies {
-    compile "org.springframework:spring-beans:${springFrameworkVersion}"
-    compile "org.springframework:spring-core:${springFrameworkVersion}"
-    compile "org.springframework:spring-web:${springFrameworkVersion}"
-    compile "org.springframework:spring-webmvc:${springFrameworkVersion}"
-    compile "org.springframework:spring-context:${springFrameworkVersion}"
-    compile "org.springframework.boot:spring-boot:${springBootVersion}"
-    compile "org.springframework.boot:spring-boot-autoconfigure:${springBootVersion}"
-    compile "org.slf4j:slf4j-api:${slf4jVersion}"
+    compile "org.springframework:spring-beans"
+    compile "org.springframework:spring-core"
+    compile "org.springframework:spring-web"
+    compile "org.springframework:spring-webmvc"
+    compile "org.springframework:spring-context"
+    compile "org.springframework.boot:spring-boot"
+    compile "org.springframework.boot:spring-boot-autoconfigure"
+    compile "org.slf4j:slf4j-api"
 
-    provided "javax.servlet:javax.servlet-api:${servletVersion}"
+    provided "javax.servlet:javax.servlet-api"
 
-    optional "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
+    optional "org.springframework.boot:spring-boot-configuration-processor"
     optional "com.squareup.okhttp3:okhttp:${okHttp3Version}"
-    optional "org.apache.httpcomponents:httpcore:${httpCoreVersion}"
-    optional "org.apache.httpcomponents:httpclient:${httpClientVersion}"
+    optional "org.apache.httpcomponents:httpcore"
+    optional "org.apache.httpcomponents:httpclient"
 
-    runtime "ch.qos.logback:logback-classic:${logbackVersion}"
+    runtime "ch.qos.logback:logback-classic"
 
-    testCompile "org.codehaus.groovy:groovy-all:${groovyVersion}"
-    testCompile "org.spockframework:spock-core:${spockVersion}"
-    testCompile "org.springframework:spring-test:${springFrameworkVersion}"
+    testCompile "org.codehaus.groovy:groovy-all"
+    testCompile "org.spockframework:spock-core"
+    testCompile "org.springframework:spring-test"
     testCompile "com.squareup.okhttp3:mockwebserver:${okHttp3Version}"
 
-
-    testCompile "org.slf4j:jcl-over-slf4j:${slf4jVersion}"
-    testRuntime "ch.qos.logback:logback-classic:${logbackVersion}"
-    testRuntime "junit:junit:${junitVersion}"
+    testCompile "org.slf4j:jcl-over-slf4j"
+    testRuntime "ch.qos.logback:logback-classic"
+    testRuntime "junit:junit"
 
     //For some reason spock explodes if it can't find a commons-logging impl on the testCompile classpath
-    permitTestUnusedDeclared "org.slf4j:jcl-over-slf4j:${slf4jVersion}"
+    permitTestUnusedDeclared "org.slf4j:jcl-over-slf4j"
     //Used to generate autocomplete hints for @ConfigurationProperties
-    permitUnusedDeclared "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
-    permitUnusedDeclared "org.apache.httpcomponents:httpclient:${httpClientVersion}"
+    permitUnusedDeclared "org.springframework.boot:spring-boot-configuration-processor"
+    permitUnusedDeclared "org.apache.httpcomponents:httpclient"
 }
 
 compileJava.dependsOn(processResources)

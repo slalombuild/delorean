@@ -3,6 +3,7 @@ package com.slalom.autoconfiguration.delorean;
 import com.slalom.delorean.interceptors.outbound.SpringRestTemplateTimeMachineOutboundRequestInterceptor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -19,7 +20,7 @@ public class TimeMachineSpringRestTemplateAutoConfiguration {
 
     private final TimeMachineConfigurationProperties properties;
 
-    public TimeMachineSpringRestTemplateAutoConfiguration(TimeMachineConfigurationProperties properties) {
+    public TimeMachineSpringRestTemplateAutoConfiguration(@Autowired TimeMachineConfigurationProperties properties) {
         this.properties = properties;
     }
 
