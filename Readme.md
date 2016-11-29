@@ -25,10 +25,10 @@ While this is certainly a valid, logical approach, we feel that the static metho
 Additionally Delorean provides the ability to easily configure a request-persistent Time Travel date/time via Http Request Header or Cookie, to make a configured date/time available to a javascript UI and/or to pass it in an Http Request Headers to downstream systems.
 
 ## Requirements
-Delorean requires Java >= 8 as well as SpringBoot >= 1.4.x and presently only provides results using Java 8 `java.time` classes - though support for legacy applications using `Joda-Time` is a potential future enhancement.
+Delorean requires Java >= 8 and has been tested against Spring Boot 1.4.x (though it should work with earlier versions) and presently only provides results using Java 8 `java.time` classes - though support for legacy applications using `Joda-Time` is a potential future enhancement.
 
 ## Usage
-In order to use Delorean you must first add it to your project dependencies
+In order to use Delorean you must first add it to your project dependencies  (It is not yet added to Maven Central, but will be shortly)
 
 Maven:
 ```xml
