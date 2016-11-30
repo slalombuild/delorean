@@ -28,9 +28,25 @@ Additionally Delorean provides the ability to easily configure a request-persist
 Delorean requires Java >= 8 and has been tested against Spring Boot 1.4.x (though it should work with earlier versions) and presently only provides results using Java 8 `java.time` classes - though support for legacy applications using `Joda-Time` is a potential future enhancement.
 
 ## Usage
-In order to use Delorean you must first add it to your project dependencies  (It is not yet added to Maven Central, but will be shortly)
+In order to use Delorean you must first add it to your project dependencies. You must first add JCenter to your list of repositories and then include the dependency
 
-Maven:
+### Maven
+Add: 
+```xml
+<repositories>
+    <repository>
+        <snapshots>
+            <enabled>false</enabled>
+        </snapshots>
+        <id>central</id>
+        <name>bintray</name>
+        <url>http://jcenter.bintray.com</url>
+    </repository>
+</repositories>
+``` 
+
+to your pom.xml or settings.xml and then import the dependency:
+
 ```xml
 <dependency>
   <groupId>com.slalom.delorean</groupId>
@@ -39,7 +55,16 @@ Maven:
 </dependency>
 ```
 
-Gradle:
+### Gradle:
+Add:
+```groovy
+repositories {
+    jcenter()
+}
+
+```
+to your build.gradle and then import the dependency:
+
 ```groovy
 compile 'com.slalom.delorean:delorean:1.0.0'
 ```
