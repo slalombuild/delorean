@@ -31,6 +31,7 @@ Delorean requires Java >= 8 and has been tested against Spring Boot 1.4.x (thoug
 In order to use Delorean you must first add it to your project dependencies. You must first add JCenter to your list of repositories and then include the dependency
 
 ### Maven
+
 Add: 
 ```xml
 <repositories>
@@ -55,13 +56,12 @@ to your pom.xml or settings.xml and then import the dependency:
 </dependency>
 ```
 
-### Gradle:
+### Gradle
 Add:
 ```groovy
 repositories {
     jcenter()
 }
-
 ```
 to your build.gradle and then import the dependency:
 
@@ -77,7 +77,7 @@ If Cookie support is enabled a Spring `@Controller` is AutoConfigured to allow t
 
 Additionally Delorean will automatically register outbound Http Request Interceptors into the Spring `ApplicationContext` for Spring `RestTemplate`, `OkHttpClient` and Apache `HttpClient` if the appropriate libraries are found on the classpath.
 
-###RestTemplate
+### RestTemplate
 
 ```java
 @Autowired
@@ -85,14 +85,14 @@ private SpringRestTemplateTimeMachineOutboundRequestInterceptor restTemplateInte
 ...
 RestTemplate template = new RestTemplateBuilder().additionalInterceptors(restTemplateInterceptor).build();
 ```
-###OkHttp3
+### OkHttp3
 ```java
 @Autowired
 private OkHttp3OutboundTimeMachineRequestInterceptor okHttpInterceptor;
 ...
 OkHttpClient client = new OkHttpClient.Builder().addInterceptor(okHttpInterceptor).build()
 ```
-###Apache HttpClient
+### Apache HttpClient
 ```java
 @Autowired
 private ApacheHttpClientOutboundTimeMachineRequestInterceptor apacheInterceptor
